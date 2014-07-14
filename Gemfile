@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby'
 gem 'bootstrap-sass'
 gem 'sprockets'
+gem 'devise'
 
 group :doc do
   gem 'sdoc', require: false
