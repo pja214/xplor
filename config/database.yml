@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: xplor_development
+  pool: 5
+  username: 
+  password:
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: xplor_test
+  pool: 5
+  username: 
+  password:
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: xplor_production
+  pool: 5
+  username: 
+  password:
