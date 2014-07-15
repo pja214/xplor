@@ -1,8 +1,10 @@
 Xplor::Application.routes.draw do
+  post "blog_reader/create"
+  patch "blog_reader/update"
   root "blog#index"
   get "blog/index"
   get "blog/new"
-  get "blog/create"
+  post "blog/create"
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

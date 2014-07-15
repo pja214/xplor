@@ -1,6 +1,7 @@
 class BlogController < ApplicationController
   def index
-    @blogs = Blog.all
+    @blogs = Blog.joins(:blog_readers).where("blog_readers.profiled = 'true' \
+      AND blog_readers.user_id = :user_id", { user_id: current_user.id })
   end
 
   def new

@@ -1,0 +1,2 @@
+module BlogReaderHelper
+end

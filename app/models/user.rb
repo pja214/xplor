@@ -9,10 +9,24 @@ class User < ActiveRecord::Base
 
   after_create :init
 
-  def init
-    (1..Blog.count).each do |blog_id|
-      BlogReader.create(user_id: self.id, blog_id: blog_id, profiled: false, \
-        liked: false, disliked: false)
+  private
+
+    # Automatically generates a BlogReader object for each blog in the db
+    def init
+      self.update(last_recommendation_time: DateTime.now - 2)
+      (1..Blog.count).each do |blog_id|
+        BlogReader.create(user_id: self.id, blog_id: blog_id, profiled: false, \
+          liked: false, disliked: false)
+      end
     end
-  end
+
+    # Placeholder implementation
+    def getRecommendedBlogID
+      # self.last_recommendation_time returns an ActiveSupport::TimeWithZone object
+      if (Time.zone.now - self.last_recommendation_time).to_i / 1.day > 1
+        self.update(last_recommendation_time: DateTime.now)
+        self.update(current_recommendation: rand(Blog.count) + 1)
+      end
+      return self.current_recommendation
+    end
 end
