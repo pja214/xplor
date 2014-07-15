@@ -1,13 +1,14 @@
 Xplor::Application.routes.draw do
+  root "profile#index"
   get "profile/index"
-  get "profile/create"
-  get "profile/destroy"
+  post "profile/create"
+  delete "profile/destroy"
   get "dislike/index"
-  get "dislike/create"
-  get "dislike/destroy"
+  post "dislike/create"
+  delete "dislike/destroy"
   get "like/index"
-  get "like/create"
-  get "like/destroy"
+  post "like/create"
+  delete "like/destroy"
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

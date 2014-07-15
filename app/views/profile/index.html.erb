@@ -1,2 +1,20 @@
-<h1>Profile#index</h1>
-<p>Find me in app/views/profile/index.html.erb</p>
+<h1>Profile</h1>
+
+<% if @blogs.count > 0 %>
+  <table>
+    <thead>
+      <th>Blogs</th>
+    </thead>
+    <tbody>
+      <tr>
+        <% @blogs.each do |blog| %>
+        <td><%= link_to blog_name, blog_url %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  <% else %>
+    <p>
+      It looks like you haven't put any blogs in your profile yet!
+    </p>
+  <% end %>
