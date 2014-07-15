@@ -1,8 +1,9 @@
 Xplor::Application.routes.draw do
   root "profile#index"
-  get "profile/index"
-  post "profile/create"
-  delete "profile/destroy"
+  match 'profile', to: 'profile#index', via: 'get'
+  match 'profile/new', to: 'profile#new', via: 'get'
+  match 'profile/create', to: 'profile#create', via: 'post'
+  match 'profile/:id/destroy', to: 'profile#destroy', via: 'delete'
   get "dislike/index"
   post "dislike/create"
   delete "dislike/destroy"

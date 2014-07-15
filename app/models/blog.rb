@@ -1,6 +1,6 @@
 class Blog < ActiveRecord::Base
   validates :name, presence: true
-  validates :url, presence: true
+  validates :url, presence: true, uniqueness: true
   has_many :blog_profile_maps
   has_many :users, :through => :blog_profile_maps
   has_many :blog_like_maps

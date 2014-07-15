@@ -4,17 +4,22 @@
   <table>
     <thead>
       <th>Blogs</th>
+      <th></th>
     </thead>
     <tbody>
+    <% @blogs.each do |blog| %>
       <tr>
-        <% @blogs.each do |blog| %>
-        <td><%= link_to blog_name, blog_url %></td>
-        <% end %>
+        <td><%= link_to blog.name, blog.url %></td>
+        <td><%= button_to "Delete?", "profile/#{blog.id}/destroy", html_options = { :method => :delete }%>
       </tr>
+    <% end %>
     </tbody>
   </table>
-  <% else %>
-    <p>
-      It looks like you haven't put any blogs in your profile yet!
-    </p>
-  <% end %>
+<% else %>
+  <p>
+    It looks like you haven't put any blogs in your profile yet!
+  </p>
+<% end %>
+<p>
+  <%= link_to "Add Blog to Profile", profile_new_path %>
+</p>

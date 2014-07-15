@@ -1,0 +1,6 @@
+<%= form_for @new_blog, url: { action: "create" } do |f| %>
+  <%= f.label :blog_id %>
+  <%= f.number_field :blog_id %>
+
+  <%= f.submit "Add Blog to Profile" %>
+<% end %>
