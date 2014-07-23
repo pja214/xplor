@@ -1,13 +1,17 @@
 <h1>Profile</h1>
 
-<% if @blogs.count > 0 %>
+<p>
+  Your recommended blog for today: <%= link_to @recommended_blog.name, @recommended_blog.url %>
+</p>
+
+<% if @blogs_saved.count > 0 %>
   <table>
     <thead>
-      <th>Blogs</th>
+      <th>Your Saved Blogs</th>
       <th></th>
     </thead>
     <tbody>
-    <% @blogs.each do |blog| %>
+    <% @blogs_saved.each do |blog| %>
       <tr>
         <td><%= link_to blog.name, blog.url %></td>
         <td><%= button_to "Delete?", "profile/#{blog.id}/destroy", html_options = { :method => :delete }%>
@@ -20,6 +24,7 @@
     It looks like you haven't put any blogs in your profile yet!
   </p>
 <% end %>
+
 <p>
   <%= link_to "Add Blog to Profile", profile_new_path %>
 </p>

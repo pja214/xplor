@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+#ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.9'
 gem 'rails', '4.0.5'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.2'

@@ -1,6 +1,8 @@
 class ProfileController < ApplicationController
   def index
-    @blogs = Blog.joins(:blog_profile_maps).where(blog_profile_maps: { user_id: current_user.id })
+    @blogs_saved = Blog.joins(:blog_profile_maps).where(blog_profile_maps: { user_id: current_user.id })
+    @blogs_liked = Blog.joins(:blog_like_maps).where(blog_profile_maps: { user_id: current_user.id })
+    @recommended_blog = Blog.find_by(id: current_user.get_recommended_blog_id)
   end
 
   def new

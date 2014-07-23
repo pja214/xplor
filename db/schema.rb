@@ -37,17 +37,6 @@ ActiveRecord::Schema.define(version: 20140715013824) do
     t.datetime "updated_at"
   end
 
-  create_table "blog_readers", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "blog_id"
-    t.boolean  "profiled"
-    t.boolean  "liked"
-    t.boolean  "disliked"
-    t.datetime "last_recommended"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "blogs", force: true do |t|
     t.string   "name"
     t.string   "url"
