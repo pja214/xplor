@@ -1,6 +1,5 @@
 <%= form_for @new_blog, url: { action: "create" } do |f| %>
-  <%= f.label :blog_id %>
-  <%= f.number_field :blog_id %>
+  <%= collection_select :blog, :id, @blogs, :id, :print_name, :prompt => true %>
 
   <%= f.submit "Add Blog to Profile" %>
 <% end %>
