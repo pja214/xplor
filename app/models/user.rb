@@ -6,12 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :blog_profile_maps
   has_many :blogs, :through => :blog_profile_maps
-  has_many :blog_like_maps
-  has_many :blogs, :through => :blog_like_maps
-  has_many :blog_dislike_maps
-  has_many :blogs, :through => :blog_dislike_maps
+  has_many :recommendations
 
-  # Placeholder implementation, recommend random blog
+
   def get_recommended_blog_id
 
     # Prevents type errors with datetime arithmetic
@@ -21,9 +18,34 @@ class User < ActiveRecord::Base
 
     # self.last_recommendation_time returns an ActiveSupport::TimeWithZone object
     if (Time.zone.now - self.last_recommendation_time).to_i / 1.day > 1
+
       self.update(last_recommendation_time: DateTime.now)
-      self.update(current_recommendation: rand(Blog.count) + 1)
+
+      # Recommendation objects have fields (user_id, blog_id, value)
+      recommendations = self.recommendations
+
+      # The daily recommendation samples randomly, using the recommendation
+      # values as weights
+      value_array = Array.new
+      i = 0
+      recommendations.each do |r|
+        value_array[i] = r['value']
+        i = i + 1
+      end
+
+      value_marker = rand * value_array.inject(:+)
+      partial_sum = 0
+      r_pointer = 0
+      while partial_sum < value_marker
+        partial_sum = partial_sum + value_array[r_pointer]
+        r_pointer = r_pointer + 1
+      end
+      r_pointer = r_pointer - 1
     end
+
+    new_recommendation = recommendations[r_pointer]
+    self.update(current_recommendation: new_recommendation.blog_id)
+    
     return self.current_recommendation
   end
 end

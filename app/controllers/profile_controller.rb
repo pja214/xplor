@@ -1,7 +1,6 @@
 class ProfileController < ApplicationController
   def index
     @blogs_saved = Blog.joins(:blog_profile_maps).where(blog_profile_maps: { user_id: current_user.id })
-    @blogs_liked = Blog.joins(:blog_like_maps).where(blog_profile_maps: { user_id: current_user.id })
     @recommended_blog = Blog.find_by(id: current_user.get_recommended_blog_id)
   end
 
@@ -25,7 +24,8 @@ class ProfileController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-    @blog.destroy
+    @blog_profile_map = BlogProfileMap.find_by(user_id: current_user.id, blog_id: params[:id])
+    @blog_profile_map.destroy
     flash[:success] = "Deleted #{@blog.name}"
     redirect_to profile_url
   end

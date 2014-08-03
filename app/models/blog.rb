@@ -7,6 +7,7 @@ class Blog < ActiveRecord::Base
   has_many :users, :through => :blog_like_maps
   has_many :blog_dislike_maps
   has_many :users, :through => :blog_dislike_maps
+  has_many :recommendations
 
   def print_name
     "#{name} - #{url}"
